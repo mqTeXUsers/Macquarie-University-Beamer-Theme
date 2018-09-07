@@ -1,0 +1,137 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+% Slide Masters:
+
+% Title
+% Text
+% 2 column
+% Full-image
+% Bibliography
+% Closing
+\PassOptionsToPackage{table}{xcolor}    % https://tex.stackexchange.com/a/5365/5483
+\documentclass[aspectratio=169, 12pt]{beamer} % Aspect ratio
+% https://tex.stackexchange.com/a/14339/5483 
+% Possible values: 1610, 169, 149, 54, 43 and 32.
+% 169 = 16:9
+
+\usetheme{macquarie}
+
+\usepackage[english]{babel}       % Set language
+\usepackage[utf8x]{inputenc}      % Set encoding
+\usepackage{colortbl}
+\mode<presentation>           % Set options
+{
+  \usetheme{default}          % Set theme
+  \usecolortheme{default}         % Set colors
+  \usefonttheme{default}          % Set font theme
+  \setbeamertemplate{caption}[numbered] % Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+\usepackage{graphicx}         % For including figures
+\usepackage{booktabs}         % For table rules
+\usepackage{hyperref}         % For cross-referencing
+
+
+\setbeamertemplate{footline}[frame number] 
+
+\title{Title for a minimal beamer presentation} % Presentation title
+\author{Author One}               % Presentation author
+\institute{Name of department/affiliation}         % Author affiliation
+\date{\today\\
+Here is some extra text to test length of line. Maybe presentation url here?}                 % Today's date  
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+% \begin{frame}[noframenumbering]
+
+\maketitle
+
+  
+% \end{frame}
+
+% Outline
+% This page includes the outline (Table of content) of the presentation. All sections and subsections will appear in the outline by default.
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+% The following is the most frequently used slide types in beamer
+% The slide structure is as follows:
+%
+%\begin{frame}{<slide-title>}
+% <content>
+%\end{frame}
+
+\section{Section One\\Where the section title keeps going and going and going and going.}
+
+\begin{frame}{Slide with bullet points}
+  This is a bullet list of two points:
+    \begin{itemize}
+    \item Point one
+        \item Point two
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Slide with two columns}
+  \begin{columns}
+    \column{.5\textwidth}
+        Text goes in first column.
+        
+        \column{.5\textwidth}
+        Text goes in second column
+  \end{columns}
+\end{frame}
+
+\section{Section Two}
+
+\begin{frame}{Slide with table}
+  \input{tables/table1.tex}
+\end{frame}
+
+\begin{frame}{Slide with different table}
+  \input{tables/table2.tex}
+\end{frame}
+
+\begin{frame}{Slide with figure}
+  \begin{figure}[H]
+    \centering
+        \includegraphics[height=.7\textheight]{branding/MQ_INT_VER_RGB_POS.pdf}
+        \caption{Caption for figure one. MQ logo vertical.}
+        \label{fig:figure1}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Slide with references}
+  This is to reference a figure (Figure \ref{fig:figure1})\\
+    This it to reference a table (Table \ref{tab:table1})\\
+    This is to cite an article \cite{Sobotkova2015-lq, Nosek2018-yv}\\
+    This is to add an article to the references without mentioning in the text \nocite{Borgman2015-rh, Center_for_Open_Science2018-pn}\\
+\end{frame}
+\section{References}
+
+% Adding the option 'allowframebreaks' allows the contents of the slide to be expanded in more than one slide.
+% The "1" comes from the outer theme"
+\begin{frame}[allowframebreaks]{References}
+  \tiny
+  \bibliography{references}
+  \bibliographystyle{apalike}
+\end{frame}
+
+
+\begin{frame}[standout]
+Thank you!
+\end{frame}
+
+
+
+\end{document}

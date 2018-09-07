@@ -1,0 +1,157 @@
+%%
+%% This is file `beamerouterthememacquarie.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% beamerouterthememacquarie.dtx  (with options: `package')
+%% ---------------------------------------------------------------------------
+%% Copyright 2015 Matthias Vogelgesang and the LaTeX community. A full list of
+%% contributors can be found at
+%% 
+%%     https://github.com/matze/mtheme/graphs/contributors
+%% 
+%% and the original template was based on the HSRM theme by Benjamin Weiss.
+%% 
+%% This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+%% International License (https://creativecommons.org/licenses/by-sa/4.0/).
+%% ---------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerouterthememacquarie}[2017/01/23 macquarie outer theme]
+\RequirePackage{etoolbox}
+\RequirePackage{calc}
+\RequirePackage{pgfopts}
+\pgfkeys{
+  /macquarie/outer/numbering/.cd,
+    .is choice,
+    none/.code=\setbeamertemplate{frame numbering}[none],
+    counter/.code=\setbeamertemplate{frame numbering}[counter],
+    fraction/.code=\setbeamertemplate{frame numbering}[fraction],
+}
+\pgfkeys{
+  /macquarie/outer/progressbar/.cd,
+    .is choice,
+    none/.code={%
+      \setbeamertemplate{headline}[plain]
+      \setbeamertemplate{frametitle}[plain]
+      \setbeamertemplate{footline}[plain]
+    },
+    head/.code={\pgfkeys{/macquarie/outer/progressbar=none}
+      \addtobeamertemplate{headline}{}{%
+        \usebeamertemplate*{progress bar in head/foot}
+      }
+    },
+    frametitle/.code={\pgfkeys{/macquarie/outer/progressbar=none}
+      \addtobeamertemplate{frametitle}{}{%
+        \usebeamertemplate*{progress bar in head/foot}
+      }
+    },
+    foot/.code={\pgfkeys{/macquarie/outer/progressbar=none}
+      \addtobeamertemplate{footline}{}{%
+        \usebeamertemplate*{progress bar in head/foot}%
+      }
+    },
+}
+\newcommand{\macquarie@outer@setdefaults}{
+  \pgfkeys{/macquarie/outer/.cd,
+    numbering=counter,
+    progressbar=none,
+  }
+}
+\setbeamertemplate{navigation symbols}{}
+\defbeamertemplate{frame footer}{none}{}
+\defbeamertemplate{frame footer}{custom}[1]{ #1 }
+\defbeamertemplate{frame numbering}{none}{}
+\defbeamertemplate{frame numbering}{counter}{\insertframenumber}
+\defbeamertemplate{frame numbering}{fraction}{
+  \insertframenumber/\inserttotalframenumber
+}
+\defbeamertemplate{headline}{plain}{}
+\defbeamertemplate{footline}{plain}{%
+  \begin{beamercolorbox}[wd=\textwidth, sep=3ex]{footline}%
+    \usebeamerfont{page number in head/foot}%
+    \usebeamertemplate*{frame footer}
+    \hfill%
+    \usebeamertemplate*{frame numbering}
+  \end{beamercolorbox}%
+}
+\newlength{\macquarie@frametitle@padding}
+\setlength{\macquarie@frametitle@padding}{2.2ex}
+\newcommand{\macquarie@frametitlestrut@start}{
+  \rule{0pt}{\macquarie@frametitle@padding +%
+    \totalheightof{%
+      \ifcsdef{macquarie@frametitleformat}{\macquarie@frametitleformat X}{X}%
+    }%
+  }%
+}
+\newcommand{\macquarie@frametitlestrut@end}{
+  \rule[-\macquarie@frametitle@padding]{0pt}{\macquarie@frametitle@padding}
+}
+\defbeamertemplate{frametitle}{plain}{%
+  \nointerlineskip%
+  \begin{adjustbox}{width=\paperwidth,center}
+    \begin{tikzpicture}
+      \useasboundingbox (0,0) rectangle (\paperwidth,.11\paperheight);
+      \fill[color=mqSand] (0,0) rectangle (\paperwidth, .11\paperheight);
+        \node[text width=0.8\paperwidth,right, anchor=north west] at (0.5,0.825) {%
+         \insertframetitle%
+        };
+           \node[inner sep=0, outer sep=0, anchor=north west] at (0.8\paperwidth,1.1) {
+        \includegraphics[width=0.2\paperwidth]{branding/MQ_MAS_HOR_RGB_POS.pdf}
+    };
+
+    \end{tikzpicture}
+  \end{adjustbox}
+
+  % \begin{beamercolorbox}[%
+  %     wd=\paperwidth,%
+  %     sep=0pt,%
+  %     leftskip=\macquarie@frametitle@padding,%
+  %     rightskip=\macquarie@frametitle@padding,%
+  %   ]{frametitle}%
+  % %   \nointerlineskip
+  % \begin{tikzpicture}
+  % %
+
+  % %\macquarie@frametitlestrut@start%
+  % \end{tikzpicture}
+
+  % \nolinebreak%
+  % %\macquarie@frametitlestrut@end%
+
+  % \end{beamercolorbox}%
+}
+\setbeamertemplate{frametitle continuation}{%
+  \usebeamerfont{frametitle}%
+\insertcontinuationcount
+}
+\newlength{\macquarie@progressinheadfoot}
+\newlength{\macquarie@progressinheadfoot@linewidth}
+\setlength{\macquarie@progressinheadfoot@linewidth}{0.4pt}
+\setbeamertemplate{progress bar in head/foot}{
+  \nointerlineskip
+  \setlength{\macquarie@progressinheadfoot}{%
+    \paperwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+  }%
+  \begin{beamercolorbox}[wd=\paperwidth]{progress bar in head/foot}
+    \tikzexternaldisable%
+    \begin{tikzpicture}
+      \fill[bg] (0,0) rectangle (\paperwidth, \macquarie@progressinheadfoot@linewidth);
+      \fill[fg] (0,0) rectangle (\macquarie@progressinheadfoot, \macquarie@progressinheadfoot@linewidth);
+    \end{tikzpicture}%
+    \tikzexternalenable%
+  \end{beamercolorbox}
+}
+\AtBeginDocument{%
+  \apptocmd{\appendix}{%
+    \pgfkeys{%
+      /macquarie/outer/.cd,
+      numbering=none,
+      progressbar=none}
+    }{}{}
+}
+\macquarie@outer@setdefaults
+\ProcessPgfPackageOptions{/macquarie/outer}
+\endinput
+%%
+%% End of file `beamerouterthememacquarie.sty'.

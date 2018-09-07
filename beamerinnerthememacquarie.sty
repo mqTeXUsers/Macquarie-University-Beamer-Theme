@@ -1,0 +1,399 @@
+%%
+%% This is file `beamerinnerthememacquarie.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% beamerinnerthememacquarie.dtx  (with options: `package')
+%% ---------------------------------------------------------------------------
+%% Copyright 2015 Matthias Vogelgesang and the LaTeX community. A full list of
+%% contributors can be found at
+%% 
+%%     https://github.com/matze/mtheme/graphs/contributors
+%% 
+%% and the original template was based on the HSRM theme by Benjamin Weiss.
+%% 
+%% This work is licensed under a Creative Commons Attribution-ShareAlike 4.0
+%% International License (https://creativecommons.org/licenses/by-sa/4.0/).
+%% ---------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthememacquarie}[2017/01/23 macquarie inner theme]
+\RequirePackage{etoolbox}
+\RequirePackage{keyval}
+\RequirePackage{calc}
+\RequirePackage{pgfopts}
+\RequirePackage{tikz}
+\RequirePackage{background}
+\RequirePackage{adjustbox}
+\pgfkeys{
+  /macquarie/inner/sectionpage/.cd,
+    .is choice,
+    none/.code=\macquarie@disablesectionpage,
+    simple/.code={\macquarie@enablesectionpage
+                  \setbeamertemplate{section page}[simple]},
+    progressbar/.code={\macquarie@enablesectionpage
+                       \setbeamertemplate{section page}[progressbar]},
+}
+\pgfkeys{
+  /macquarie/inner/subsectionpage/.cd,
+    .is choice,
+    none/.code=\macquarie@disablesubsectionpage,
+    simple/.code={\macquarie@enablesubsectionpage
+                  \setbeamertemplate{section page}[simple]},
+    progressbar/.code={\macquarie@enablesubsectionpage
+                       \setbeamertemplate{section page}[progressbar]},
+}
+\newcommand{\macquarie@inner@setdefaults}{
+  \pgfkeys{/macquarie/inner/.cd,
+    sectionpage=progressbar,
+    subsectionpage=none
+  }
+}
+
+\setbeamertemplate{title page}{
+  \nointerlineskip
+  \begin{adjustbox}{width=\paperwidth,center}
+    \begin{tikzpicture}
+      \useasboundingbox (0,0) rectangle (\paperwidth,\paperheight);
+      \fill[color=mqSand] (0,0) rectangle (\paperwidth, \paperheight);
+  %    \hskip-10pt
+  %    \node[inner sep=0pt] (logo) at (2.2, 1.2) {\usebeamertemplate*{logo titlepage}};
+  %    \node[inner sep=0pt] (logo) at (6.4, 1.4) {\usebeamertemplate*{affiliationlogo titlepage}};
+
+      \node[text width=0.8\paperwidth,right, anchor=north west] at (0.5cm,7.5cm) {
+        \begin{beamercolorbox}[wd=\textwidth]{title page header}
+        \usebeamerfont{title}\usebeamercolor{title}\inserttitle%
+        \end{beamercolorbox}%
+      };
+      \node[text width=0.8\paperwidth,right, anchor=north west] at (0.5,6.8cm) {
+        \begin{beamercolorbox}[wd=\textwidth]{author}
+          \usebeamerfont{author}\insertauthor%
+        \end{beamercolorbox}
+      };
+      \node[text width=0.8\paperwidth,right, anchor=north west] at (0.5,6cm) {
+        \begin{beamercolorbox}[wd=\textwidth]{date}
+          \usebeamerfont{date}\insertdate%
+        \end{beamercolorbox}
+      };
+      \node[text width=0.8\paperwidth,right, anchor=north west] at (0.5,6.35cm) {
+        \begin{beamercolorbox}[wd=\textwidth]{institute}
+          \usebeamerfont{institute}\insertinstitute%
+        \end{beamercolorbox}
+      };
+      % \node[inner sep=0, outer sep=0, anchor=south west] at (0,0) {
+      %   \includegraphics[width=0.4\paperwidth]{branding/fourTenths.png}
+      % };
+      \node[inner sep=0, outer sep=0, anchor=north west] at (0.7\paperwidth,9) {
+        \includegraphics[width=0.3\paperwidth]{branding/MQ_INT_HOR_RGB_POS.pdf}
+      };
+      \node[inner sep=0, outer sep=0, anchor=south west] at (-1,-2) {
+        \includegraphics[width=1.1\paperwidth]{branding/sixTenths.png}
+      };
+    \end{tikzpicture}
+
+%%    \end{macrocode}
+%%
+%% Beamer's definition of |\insertauthor| is always nonempty, so we have
+%% to test another macro initialized by |\author{...}| to see if the user has
+%% defined an author. This solution was suggested by Enrico Gregorio in an
+%% answer to \href{https://tex.stackexchange.com/questions/241306/}{this
+%% Stack Exchange question}.
+%%
+%%    \begin{macrocode}
+  \end{adjustbox}
+}
+\def\maketitle{%
+
+  \ifbeamer@inframe
+    \titlepage
+  \else
+    \frame[plain,noframenumbering]{\titlepage}
+  \fi
+}
+\def\titlepage{%
+  \usebeamertemplate{title page}
+}
+\setbeamertemplate{title graphic}{
+  \vbox to 0pt {
+    \vspace*{2em}
+    \inserttitlegraphic%
+  }%
+  \nointerlineskip%
+}
+\setbeamertemplate{title}{
+  \raggedright%
+  \linespread{1.0}%
+  \inserttitle%
+  \par%
+  \vspace*{0.5em}
+}
+\setbeamertemplate{subtitle}{
+  \raggedright%
+  \insertsubtitle%
+  \par%
+  \vspace*{0.5em}
+}
+\newlength{\macquarie@titleseparator@linewidth}
+\setlength{\macquarie@titleseparator@linewidth}{0.4pt}
+\setbeamertemplate{title separator}{
+  \tikzexternaldisable%
+  \begin{tikzpicture}
+    \fill[fg] (0,0) rectangle (\textwidth, \macquarie@titleseparator@linewidth);
+  \end{tikzpicture}%
+  \tikzexternalenable%
+  \par%
+}
+\setbeamertemplate{author}{
+  \vspace*{2em}
+  \insertauthor%
+  \par%
+  \vspace*{0.25em}
+}
+\setbeamertemplate{date}{
+  \insertdate%
+  \par%
+}
+\setbeamertemplate{institute}{
+  \vspace*{3mm}
+  \insertinstitute%
+  \par%
+}
+\defbeamertemplate{section page}{progressbar}{
+
+ \nointerlineskip
+  \begin{adjustbox}{width=\paperwidth,center}
+    \begin{tikzpicture}
+
+      \useasboundingbox (0,0) rectangle (\paperwidth,\paperheight);
+      \fill[color=mqSand] (0,0) rectangle (\paperwidth, \paperheight);
+
+      \node[text width=0.6\textwidth,right, anchor=north west] at (0.5\textwidth,5cm) {
+        \begin{beamercolorbox}[wd=\textwidth]{title page header}
+           \usebeamercolor[fg]{section title}%
+            \usebeamerfont{section title}%
+            \insertsectionhead\par
+            \ifx\insertsubsectionhead\@empty\else
+              \usebeamercolor[fg]{subsection title}%
+              \usebeamerfont{subsection title}%
+              \insertsubsectionhead
+            \fi
+        \end{beamercolorbox}%
+      };
+      % \node[text width=0.2\paperwidth,right, anchor=north west] at (1,5.5cm) {
+      %   \begin{beamercolorbox}[wd=\textwidth]{date}
+      %     \usebeamerfont{date}\insertdate%
+      %   \end{beamercolorbox}
+      % };
+      % \node[text width=0.8\paperwidth,right, anchor=north west] at (1,7.25cm) {
+      %   \begin{beamercolorbox}[wd=\textwidth]{author}
+      %     \usebeamerfont{author}\insertauthor%
+      %   \end{beamercolorbox}
+      % };
+      % \node[text width=0.8\paperwidth,right, anchor=north west] at (1,6.75cm) {
+      %   \begin{beamercolorbox}[wd=\textwidth]{institute}
+      %     \usebeamerfont{institute}\insertinstitute%
+      %   \end{beamercolorbox}
+      % };
+      % \node[inner sep=0, outer sep=0, anchor=south west] at (0,0) {
+      %   \includegraphics[width=0.4\paperwidth]{branding/fourTenths.png}
+      % };
+      \node[inner sep=0, outer sep=0, anchor=north west] at (0.7\paperwidth,9) {
+        \includegraphics[width=0.3\paperwidth]{branding/MQ_INT_HOR_RGB_POS.pdf}
+      };
+      \node[inner sep=0, outer sep=0, anchor=south west] at (-0.25,-0.25) {
+        \includegraphics[height=1.05\paperheight]{branding/SideTransparent.png}
+      };
+    \end{tikzpicture}
+
+%%    \end{macrocode}
+%%
+%% Beamer's definition of |\insertauthor| is always nonempty, so we have
+%% to test another macro initialized by |\author{...}| to see if the user has
+%% defined an author. This solution was suggested by Enrico Gregorio in an
+%% answer to \href{https://tex.stackexchange.com/questions/241306/}{this
+%% Stack Exchange question}.
+%%
+%%    \begin{macrocode}
+  \end{adjustbox}
+
+  % \begin{center}
+  %
+
+  %   \usebeamercolor[fg]{section title}
+  %   \usebeamerfont{section title}
+  %   \insertsectionhead\par
+  %   \ifx\insertsubsectionhead\@empty\else
+  %     \usebeamercolor[fg]{subsection title}
+  %     \usebeamerfont{subsection title}
+  %     \insertsubsectionhead
+  %   \fi
+  % \end{center}
+}
+
+\defbeamertemplate{section page}{simple}{
+  \centering
+  \begin{minipage}{22em}
+
+    \raggedright
+    \usebeamercolor[fg]{section title}
+    \usebeamerfont{section title}
+    \insertsectionhead\\[-1ex]
+    \usebeamertemplate*{progress bar in section page}
+    \par
+    \ifx\insertsubsectionhead\@empty\else%
+      \usebeamercolor[fg]{subsection title}%
+      \usebeamerfont{subsection title}%
+      \insertsubsectionhead
+    \fi
+  \end{minipage}
+  \par
+  \vspace{\baselineskip}
+}
+\newcommand{\macquarie@disablesectionpage}{
+  \AtBeginSection{
+    % intentionally empty
+  }
+}
+\newcommand{\macquarie@enablesectionpage}{
+  \AtBeginSection{
+    \ifbeamer@inframe
+      \sectionpage
+    \else
+      \frame[plain,c,noframenumbering]{\sectionpage}
+    \fi
+  }
+}
+\setbeamertemplate{subsection page}{%
+  \usebeamertemplate*{section page}
+}
+\newcommand{\macquarie@disablesubsectionpage}{
+  \AtBeginSubsection{
+    % intentionally empty
+  }
+}
+\newcommand{\macquarie@enablesubsectionpage}{
+  \AtBeginSubsection{
+    \ifbeamer@inframe
+      \subsectionpage
+    \else
+      \frame[plain,c,noframenumbering]{\subsectionpage}
+    \fi
+  }
+}
+\newlength{\macquarie@progressonsectionpage}
+\newlength{\macquarie@progressonsectionpage@linewidth}
+\setlength{\macquarie@progressonsectionpage@linewidth}{0.4pt}
+\setbeamertemplate{progress bar in section page}{
+  \setlength{\macquarie@progressonsectionpage}{%
+    \textwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+  }%
+  \tikzexternaldisable%
+  \begin{tikzpicture}
+    \fill[bg] (0,0) rectangle (\textwidth, \macquarie@progressonsectionpage@linewidth);
+    \fill[fg] (0,0) rectangle (\macquarie@progressonsectionpage, \macquarie@progressonsectionpage@linewidth);
+  \end{tikzpicture}%
+  \tikzexternalenable%
+}
+\def\inserttotalframenumber{100}
+\newlength{\macquarie@blocksep}
+\newlength{\macquarie@blockadjust}
+\setlength{\macquarie@blocksep}{0.75ex}
+\setlength{\macquarie@blockadjust}{0.25ex}
+\providecommand{\macquarie@strut}{%
+  \vphantom{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz()}%
+}
+\newcommand{\macquarie@block}[1]{
+  \par\vskip\medskipamount%
+  \setlength{\parskip}{0pt}
+
+  \ifbeamercolorempty[bg]{block title#1}{%
+    \begin{beamercolorbox}[rightskip=0pt plus 4em]{block title#1}}{%
+  \ifbeamercolorempty[bg]{block title}{%
+    \begin{beamercolorbox}[rightskip=0pt plus 4em]{block title#1}%
+  }%
+  {%
+    \begin{beamercolorbox}[
+      sep=\dimexpr\macquarie@blocksep-\macquarie@blockadjust\relax,
+      leftskip=\macquarie@blockadjust,
+      rightskip=\dimexpr\macquarie@blockadjust plus 4em\relax
+    ]{block title#1}%
+  }}%
+      \usebeamerfont*{block title#1}%
+
+      \macquarie@strut%
+      \insertblocktitle%
+      \macquarie@strut%
+  \end{beamercolorbox}%
+  \nointerlineskip%
+  \ifbeamercolorempty[bg]{block body#1}{%
+    \begin{beamercolorbox}[vmode]{block body#1}}{
+  \ifbeamercolorempty[bg]{block body}{%
+    \begin{beamercolorbox}[vmode]{block body#1}%
+
+  }{%
+    \begin{beamercolorbox}[sep=\macquarie@blocksep, vmode]{block body#1}%
+    \vspace{-\macquarie@parskip}
+  }}%
+      \usebeamerfont{block body#1}%
+      \setlength{\parskip}{\macquarie@parskip}%
+}
+\setbeamertemplate{block begin}{\macquarie@block{}}
+\setbeamertemplate{block alerted begin}{\macquarie@block{ alerted}}
+\setbeamertemplate{block example begin}{\macquarie@block{ example}}
+\setbeamertemplate{block end}{\end{beamercolorbox}\vspace*{0.2ex}}
+\setbeamertemplate{block alerted end}{\end{beamercolorbox}\vspace*{0.2ex}}
+\setbeamertemplate{block example end}{\end{beamercolorbox}\vspace*{0.2ex}}
+\setbeamertemplate{itemize items}{\textbullet}
+\setbeamertemplate{caption label separator}{: }
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{footnote}{%
+  \parindent 0em\noindent%
+  \raggedright
+  \usebeamercolor{footnote}\hbox to 0.8em{\hfil\insertfootnotemark}\insertfootnotetext\par%
+}
+\newlength{\macquarie@parskip}
+\setlength{\macquarie@parskip}{0.5em}
+\setlength{\parskip}{\macquarie@parskip}
+\linespread{1.15}
+\define@key{beamerframe}{c}[true]{% centered
+  \beamer@frametopskip=0pt plus 1fill\relax%
+  \beamer@framebottomskip=0pt plus 1fill\relax%
+  \beamer@frametopskipautobreak=0pt plus .4\paperheight\relax%
+  \beamer@framebottomskipautobreak=0pt plus .6\paperheight\relax%
+  \def\beamer@initfirstlineunskip{}%
+}
+\providebool{macquarie@standout}
+\define@key{beamerframe}{standout}[true]{%
+  \booltrue{macquarie@standout}
+  \begingroup
+    \setkeys{beamerframe}{c}
+    % \setkeys{beamerframe}{noframenumbering}
+    \ifbeamercolorempty[bg]{palette primary}{
+      \setbeamercolor{background canvas}{
+        use=palette primary,
+        bg=-palette primary.fg
+      }
+    }{
+      \setbeamercolor{background canvas}{
+        use=palette primary,
+        bg=palette primary.bg
+      }
+    }
+    \setbeamercolor{local structure}{
+      fg=palette primary.fg
+    }
+    \centering
+    \usebeamercolor[fg]{palette primary}
+    \usebeamerfont{standout}
+}
+  \apptocmd{\beamer@reseteecodes}{%
+    \ifbool{macquarie@standout}{
+      \endgroup
+      \boolfalse{macquarie@standout}
+    }{}
+  }{}{}
+\macquarie@inner@setdefaults
+\ProcessPgfPackageOptions{/macquarie/inner}
+\endinput
+%%
+%% End of file `beamerinnerthememacquarie.sty'.
