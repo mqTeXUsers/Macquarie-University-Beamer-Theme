@@ -4,8 +4,8 @@ Forked from [Metropolis](https://github.com/matze/mtheme)
 
 Edits by:
 
-Brian Ballsun-Stanton (@denubisx)
-James Tocknell (@aragilar)
+* Brian Ballsun-Stanton (@denubisx)
+* James Tocknell (@aragilar)
 
 Compile with:
 
